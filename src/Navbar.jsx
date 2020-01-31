@@ -16,12 +16,12 @@ function NavBarComp() {
       >
         <Navbar.Brand>
           <Row className="noFlexWrap">
-            <Image
+            {/* <Image
               size="mini"
               className="navLogo"
               src={process.env.PUBLIC_URL + "/whiteKclLogo.png"}
             />
-            <div className="bottom-align">KCL Hub</div>
+            <div className="bottom-align">KCL Hub</div> */}
           </Row>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
