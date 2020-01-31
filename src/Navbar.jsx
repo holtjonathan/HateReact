@@ -3,7 +3,6 @@ import React from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
-import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 

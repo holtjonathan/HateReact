@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import { ApolloProvider } from "react-apollo";
+import React, { useState } from "react";
 import config from "./config";
 import ApolloClient from "apollo-boost";
-import Reward from "./Reward";
-import Special from "./Special";
-import Scenario from "./Scenario";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Modal from "react-bootstrap/Modal";
-
-import Card from "react-bootstrap/Card";
+import ScenarioModal from "./ScenarioModal";
+import ScenarioList from "./ScenarioList";
 
 const client = new ApolloClient({
   uri: config.hateUrl
@@ -27,7 +20,6 @@ function HatePage() {
   });
 
   const handleClose = () => {
-    // handleShow();
     setShowModal(false);
   };
 
@@ -52,94 +44,18 @@ function HatePage() {
 
   return (
     <div>
-      <Modal size="lg" show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedScen.name} </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Scenario
-            name={selectedScen.name}
-            description={selectedScen.description}
-            scenarioRewards={selectedScen.scenarioRewardAssignments}
-            scenarioSpecials={selectedScen.scenarioSpecialAssignments}
-            key={selectedScen.scenarioId}
-          ></Scenario>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
+      <ScenarioModal
+        scenario={selectedScen}
+        showModal={showModal}
+        handleClose={handleClose}
+      ></ScenarioModal>
 
       <Jumbotron>
         <h1>Scenarios</h1>
         <p>The many different scenarios to play in the game of HATE</p>
       </Jumbotron>
 
-      <ApolloProvider client={client}>
-        <div>
-          <Query
-            query={gql`
-              {
-                scenarios {
-                  scenarioId
-                  description
-                  name
-                  scenarioRewardAssignments {
-                    reward {
-                      rewardId
-                      name
-                      description
-                      hateReward
-                      resourceReward
-                      unitUpgrade
-                      rewardType
-                    }
-                  }
-                  scenarioSpecialAssignments {
-                    special {
-                      specialId
-                      name
-                      description
-                    }
-                  }
-                }
-              }
-            `}
-          >
-            {({ loading, error, data }) => {
-              if (loading) return <p>Loading...</p>;
-              if (error) return <p>Error :(</p>;
-              return data.scenarios.map(
-                ({
-                  scenarioId,
-                  description,
-                  name,
-                  scenarioRewardAssignments,
-                  scenarioSpecialAssignments
-                }) => (
-                  <div>
-                    <Card
-                      style={{ width: "18rem" }}
-                      onClick={() =>
-                        handleShow(
-                          scenarioId,
-                          description,
-                          name,
-                          scenarioRewardAssignments,
-                          scenarioSpecialAssignments
-                        )
-                      }
-                    >
-                      <Card.Header>{name}</Card.Header>
-                      <Card.Body>
-                        <Card.Text>{description}</Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                )
-              );
-            }}
-          </Query>
-        </div>
-      </ApolloProvider>
+      <ScenarioList client={client} handleShow={handleShow}></ScenarioList>
     </div>
   );
 }

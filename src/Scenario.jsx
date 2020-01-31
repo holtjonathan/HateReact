@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Reward from "./Reward";
 import Special from "./Special";
 import CardDeck from "react-bootstrap/CardDeck";
 
 function Scenario({ name, description, scenarioRewards, scenarioSpecials }) {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedScen, setSelectedScen] = useState(null);
-
-  const handleClose = () => {
-    handleShow();
-    setShowModal(false);
-  };
-
-  const handleShow = scen => {
-    console.log("here?");
-    // setSelectedScen(scen);
-    setShowModal(true);
-  };
-
   return (
     <div>
       {/* <p>{description}</p> */}
