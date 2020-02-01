@@ -4,6 +4,7 @@ import ApolloClient from "apollo-boost";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import ScenarioModal from "./ScenarioModal";
 import ScenarioList from "./ScenarioList";
+import CardDeck from "react-bootstrap/CardDeck";
 
 const client = new ApolloClient({
   uri: config.hateUrl
@@ -55,7 +56,9 @@ function HatePage() {
         <p>The many different scenarios to play in the game of HATE</p>
       </Jumbotron>
 
-      <ScenarioList client={client} handleShow={handleShow}></ScenarioList>
+      <CardDeck>
+        <ScenarioList client={client} handleShow={handleShow}></ScenarioList>
+      </CardDeck>
     </div>
   );
 }

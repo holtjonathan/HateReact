@@ -1,3 +1,11 @@
+.hateReward {
+  color: red;
+}
+
+.resourceReward {
+  color: green;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

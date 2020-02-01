@@ -6,14 +6,19 @@ function Reward({ reward }) {
     <div>
       {/* <h1>{reward.name}</h1> */}
       <Card style={{ width: "18rem" }}>
-        <Card.Header>{reward.name}</Card.Header>
+        <Card.Header>{reward.rewardType}</Card.Header>
         <Card.Body>
-          <Card.Title>{reward.rewardType}</Card.Title>
+          <Card.Title>{reward.name}</Card.Title>
           <Card.Text>{reward.description}</Card.Text>
         </Card.Body>
         <Card.Footer className="text-muted">
-          Hate: {reward.hateReward} <br />
-          Resource: {reward.resourceReward}
+          <div className="hateReward">
+            <strong>Hate:</strong> {reward.hateReward}
+          </div>
+
+          <div className="resourceReward">
+            <strong>Resource:</strong> {reward.resourceReward}
+          </div>
         </Card.Footer>
       </Card>
     </div>
